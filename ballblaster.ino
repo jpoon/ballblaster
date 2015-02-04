@@ -1,80 +1,94 @@
 #include "actuator.h"
 #include "accelerometer.h"
+#include "reloadActuator.h"
 
-#define RELAY1  6                        
-#define RELAY2  7                        
-#define RELAY3  8                        
-#define RELAY4  9
+#include <avr/io.h>
+#include <avr/interrupt.h>
 
 // accelerometer
-
+#define ADXL_X A0
+#define ADXL_Y A1
 #define ADXL_Z A2
 
-Actuator actuator1(10, 11);
-Actuator actuator2(12, 13);
+Actuator actuator_reload(10, 11);
+Actuator actuator_pitch(12, 13);
+
 Accelerometer accelerometer(ADXL_X, ADXL_Y, ADXL_Z);
 
-ISR(EXT_INT0_vect)
+void actuator_reload_limit_change() 
 {
-
-	Serial.println('test');
+    Serial.print("change ");
+	int limitVal = digitalRead(2);
+	Serial.println(limitVal);
 }
 
 void setup()
 {
-pinMode(2,INPUT_PULLUP);
+	Serial.begin(115200);
 
-  sei();
-  Serial.begin(115200);
+	// External Interrupts: 
+	//	3 (interrupt 0)
+	//	2 (interrupt 1)
+	//	0 (interrupt 2)
+	//	1 (interrupt 3)
+	//	7 (interrupt 4)
+	attachInterrupt(0, actuator_reload_limit_change, CHANGE);
+	//attachInterrupt(1, actuator_reload_limit_change, CHANGE);
+
+	pinMode(2, INPUT_PULLUP);
+	//pinMode(3, INPUT_PULLUP);
 }
 
 void loop()
 {
-  char cmd;
-  while (Serial.available() > 0) 
-  {
-    cmd = (char)Serial.read();
-    Serial.print(cmd);
-    
-    switch (cmd) 
+	char cmd;
+	while (Serial.available() > 0) 
     {
-      case 'a': 
-        actuator1.Retract();
-        break;
-      case 'b': 
-        actuator1.Extend();
-        break;
-      case 'c': 
-        actuator1.Stop();
-        break;
+		cmd = (char)Serial.read();
+		Serial.print(cmd);
+    
+		switch (cmd) 
+		{
+			/* reload */
+			case 'a': 
+				actuator_reload.Retract();
+				break;
+			case 'b': 
+				actuator_reload.Extend();
+				break;
+			case 'c': 
+				actuator_reload.Stop();
+				break;
 
-      case 'd': 
-        actuator2.Retract();
-        break;
-      case 'e': 
-        actuator2.Extend();
-        break;
-      case 'f': 
-        actuator2.Stop();
-        break;
+			/* pitch */	
+			case 'd': 
+				actuator_pitch.Retract();
+				break;
+			case 'e': 
+				actuator_pitch.Extend();
+				break;
+			case 'f': 
+				actuator_pitch.Stop();
+				break;
 
-      case 'g':
-	   	int x, y, z;
-		float xvoltage, yvoltage, zvoltage;
-        accelerometer.getXYZ(&x, &y, &z);
-        accelerometer.getAcceleration(&xvoltage, &yvoltage, &zvoltage);
-		
-		Serial.println("xyz:");
-		Serial.println(x);
-		Serial.println(y);
-		Serial.println(z);
+			/* accel */
+			case 'g':
+				int x, y, z;
+				float xvoltage, yvoltage, zvoltage;
+				accelerometer.getXYZ(&x, &y, &z);
+				accelerometer.getAcceleration(&xvoltage, &yvoltage, &zvoltage);
+				
+				Serial.println("xyz:");
+				Serial.println(x);
+				Serial.println(y);
+				Serial.println(z);
 
-		Serial.println("voltage:");
-		Serial.println(xvoltage);
-		Serial.println(yvoltage);
-		Serial.println(zvoltage);
-        break;
-    }
-  }
+				Serial.println("voltage:");
+				Serial.println(xvoltage);
+				Serial.println(yvoltage);
+				Serial.println(zvoltage);
+				break;
+		}
+	}
 }
 
