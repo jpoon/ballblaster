@@ -8,6 +8,7 @@ class ReloadActuator : public Actuator {
 public:
 	ReloadActuator(int pin1, int pin2);
 	void Reload();
+	void LimitHit();
 private:
 	volatile int status;
 };

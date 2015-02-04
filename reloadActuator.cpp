@@ -12,22 +12,22 @@ ReloadActuator::ReloadActuator(int pin1, int pin2) : Actuator(pin1, pin2)
 
 void ReloadActuator::Reload() {
 	status = 1;
-	base.Extend();
+	Extend();
 }
 
-void ReloadActuator::SetLimit() {
+void ReloadActuator::LimitHit() {
 	switch (status) {
 	case 0:
 		break;
 
 	case 1: 
 		status = 2;
-		base.Retract();
+		Retract();
 		break;
 
 	case 2:
 		status = 0;
-		base.Stop();
+		Stop();
 		break;
 	}
 }
