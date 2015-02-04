@@ -12,6 +12,7 @@
 
 Actuator actuator_reload(10, 11);
 Actuator actuator_pitch(12, 13);
+Actuator actuator_yaw(8, 9);
 
 Accelerometer accelerometer(ADXL_X, ADXL_Y, ADXL_Z);
 
@@ -71,8 +72,19 @@ void loop()
 				actuator_pitch.Stop();
 				break;
 
+      /* yaw */ 
+      case 'g': 
+        actuator_yaw.Retract();
+        break;
+      case 'h': 
+        actuator_yaw.Extend();
+        break;
+      case 'i': 
+        actuator_yaw.Stop();
+        break;
+
 			/* accel */
-			case 'g':
+			case 'z':
 				int x, y, z;
 				float xvoltage, yvoltage, zvoltage;
 				accelerometer.getXYZ(&x, &y, &z);
