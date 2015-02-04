@@ -16,6 +16,7 @@ Pulse trigger(6);
 
 // actuator
 ReloadActuator actuator_reload(9, 10);
+//ReloadActuator actuator_reload(11, 12);
 Actuator actuator_pitch(11, 12);
 Actuator actuator_yaw(7, 8);
 
@@ -23,10 +24,17 @@ Accelerometer accelerometer(ADXL_X, ADXL_Y, ADXL_Z);
 
 void actuator_reload_limit_change() 
 {
-    Serial.print("change ");
-    int limitVal = digitalRead(2);
-    actuator_reload.LimitHit();
-    Serial.println(limitVal);
+	static unsigned long last_interrupt_time = 0;
+	unsigned long interrupt_time = millis();
+
+	int buttonState = digitalRead(3);
+	if (buttonState == 1) {
+		if (interrupt_time - last_interrupt_time > 1000)
+		{
+			actuator_reload.LimitHit();
+		}
+		last_interrupt_time = interrupt_time;
+	}
 }
 
 void setup()
@@ -42,7 +50,7 @@ void setup()
     attachInterrupt(0, actuator_reload_limit_change, CHANGE);
     //attachInterrupt(1, actuator_reload_limit_change, CHANGE);
 
-    pinMode(2, INPUT_PULLUP);
+    pinMode(3, INPUT_PULLUP);
     //pinMode(3, INPUT_PULLUP);
 }
 
@@ -56,7 +64,7 @@ void loop()
     
         switch (cmd) 
         {
-        /* reload */
+        // reload
         case 'a': 
             actuator_reload.Retract();
             break;
@@ -70,7 +78,7 @@ void loop()
             actuator_reload.Reload();
             break;
 
-        /* pitch */	
+        // pitch
         case 'g': 
             actuator_pitch.Retract();
             break;
@@ -81,7 +89,7 @@ void loop()
             actuator_pitch.Stop();
             break;
 
-        /* yaw */ 
+        // yaw
         case 'l': 
             actuator_yaw.Retract();
             break;
@@ -92,12 +100,12 @@ void loop()
             actuator_yaw.Stop();
             break;
 
-        /* trigger */
+        // trigger
         case 'q':
             trigger.Fire();
             break;
 
-        /* accel */
+        // accel
         case 'z':
             int x, y, z;
             float xvoltage, yvoltage, zvoltage;

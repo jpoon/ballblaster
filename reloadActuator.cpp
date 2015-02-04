@@ -6,28 +6,36 @@ ReloadActuator::ReloadActuator(int pin1, int pin2) : Actuator(pin1, pin2)
 	// status
 	//	0 = stopped
 	//	1 = extend
-	//	2 = release
+	//	2 = retract 
 	status = 0;
 }
 
 void ReloadActuator::Reload() {
-	status = 1;
-	Extend();
+	status = 2;
+	Retract();
+
+	cli();
+	delay(1000);
+	sei();
 }
 
 void ReloadActuator::LimitHit() {
-	switch (status) {
-	case 0:
-		break;
+	Serial.println(status);
 
-	case 1: 
-		status = 2;
-		Retract();
-		break;
+		switch (status) {
+		case 0: //stopped
+			break;
 
-	case 2:
-		status = 0;
-		Stop();
-		break;
-	}
+		case 1: //extend
+			status = 0;
+			Serial.println("stop");
+			Stop();
+			break;
+
+		case 2: //retract
+			status = 1;
+			Serial.println("extend");
+			Extend();
+			break;
+		}
 }
