@@ -24,17 +24,32 @@ Accelerometer accelerometer(ADXL_X, ADXL_Y, ADXL_Z);
 
 void actuator_reload_limit_change() 
 {
-	static unsigned long last_interrupt_time = 0;
-	unsigned long interrupt_time = millis();
+    static unsigned long last_interrupt_time = 0;
+    unsigned long interrupt_time = millis();
 
-	int buttonState = digitalRead(3);
-	if (buttonState == 1) {
-		if (interrupt_time - last_interrupt_time > 1000)
-		{
-			actuator_reload.LimitHit();
+    int buttonState = digitalRead(3);
+    if (buttonState == 1) {
+		unsigned int debounceTime = 250;
+
+		int actuatorStatus = actuator_reload.GetState();
+		switch(actuatorStatus) {
+		case 0: //stopped
+			break;
+
+		case 1: //extend
+			break;
+
+		case 2: //retract
+			debounceTime = 500;
+			break;
 		}
-		last_interrupt_time = interrupt_time;
-	}
+
+        if (interrupt_time - last_interrupt_time > debounceTime)
+        {
+            actuator_reload.LimitHit();
+        }
+        last_interrupt_time = interrupt_time;
+    }
 }
 
 void setup()
@@ -47,11 +62,8 @@ void setup()
     //	0 (interrupt 2)
     //	1 (interrupt 3)
     //	7 (interrupt 4)
-    attachInterrupt(0, actuator_reload_limit_change, CHANGE);
-    //attachInterrupt(1, actuator_reload_limit_change, CHANGE);
 
     pinMode(3, INPUT_PULLUP);
-    //pinMode(3, INPUT_PULLUP);
 }
 
 void loop()
@@ -75,7 +87,10 @@ void loop()
             actuator_reload.Stop();
             break;
         case 'd':
+            detachInterrupt(0);
             actuator_reload.Reload();
+            delay(750);
+            attachInterrupt(0, &actuator_reload_limit_change, CHANGE);
             break;
 
         // pitch

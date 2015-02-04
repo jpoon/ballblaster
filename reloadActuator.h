@@ -9,6 +9,7 @@ public:
 	ReloadActuator(int pin1, int pin2);
 	void Reload();
 	void LimitHit();
+	int GetState();
 private:
 	volatile int status;
 };
