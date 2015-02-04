@@ -12,7 +12,9 @@
 #define ADXL_Z A2
 
 // trigger relay
+Pulse trigger(7);
 
+// actuator
 ReloadActuator actuator_reload(10, 11);
 Actuator actuator_pitch(12, 13);
 Actuator actuator_yaw(8, 9);
@@ -92,6 +94,7 @@ void loop()
 
         /* trigger */
         case 'q':
+            trigger.Fire();
             break;
 
         /* accel */
