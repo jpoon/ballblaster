@@ -12,9 +12,8 @@
 #define ADXL_Z A2
 
 // trigger relay
-P
 
-Actuator actuator_reload(10, 11);
+ReloadActuator actuator_reload(10, 11);
 Actuator actuator_pitch(12, 13);
 Actuator actuator_yaw(8, 9);
 
@@ -24,6 +23,7 @@ void actuator_reload_limit_change()
 {
     Serial.print("change ");
 	int limitVal = digitalRead(2);
+	actuator_reload.SetLimit();
 	Serial.println(limitVal);
 }
 
@@ -64,31 +64,34 @@ void loop()
 			case 'c': 
 				actuator_reload.Stop();
 				break;
+			case 'd':
+				actuator_reload.Reload();
+				break;
 
 			/* pitch */	
-			case 'd': 
+			case 'g': 
 				actuator_pitch.Retract();
 				break;
-			case 'e': 
+			case 'h': 
 				actuator_pitch.Extend();
 				break;
-			case 'f': 
+			case 'i': 
 				actuator_pitch.Stop();
 				break;
 
       /* yaw */ 
-      case 'g': 
+      case 'l': 
         actuator_yaw.Retract();
         break;
-      case 'h': 
+      case 'l': 
         actuator_yaw.Extend();
         break;
-      case 'i': 
+      case 'm': 
         actuator_yaw.Stop();
         break;
 
       /* trigger */
-      case 'j':
+      case 'q':
 
         break;
 
