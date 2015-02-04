@@ -1,4 +1,5 @@
 #include "actuator.h"
+#include "pulse.h"
 #include "accelerometer.h"
 #include "reloadActuator.h"
 
@@ -9,6 +10,9 @@
 #define ADXL_X A0
 #define ADXL_Y A1
 #define ADXL_Z A2
+
+// trigger relay
+P
 
 Actuator actuator_reload(10, 11);
 Actuator actuator_pitch(12, 13);
@@ -32,7 +36,7 @@ void setup()
 	//	2 (interrupt 1)
 	//	0 (interrupt 2)
 	//	1 (interrupt 3)
-	//	7 (interrupt 4)
+	//	7 (interrupt 4) - We are using this pin for trigger
 	attachInterrupt(0, actuator_reload_limit_change, CHANGE);
 	//attachInterrupt(1, actuator_reload_limit_change, CHANGE);
 
@@ -81,6 +85,11 @@ void loop()
         break;
       case 'i': 
         actuator_yaw.Stop();
+        break;
+
+      /* trigger */
+      case 'j':
+
         break;
 
 			/* accel */
