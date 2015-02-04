@@ -12,12 +12,12 @@
 #define ADXL_Z A2
 
 // trigger relay
-Pulse trigger(7);
+Pulse trigger(6);
 
 // actuator
-ReloadActuator actuator_reload(10, 11);
-Actuator actuator_pitch(12, 13);
-Actuator actuator_yaw(8, 9);
+ReloadActuator actuator_reload(9, 10);
+Actuator actuator_pitch(11, 12);
+Actuator actuator_yaw(7, 8);
 
 Accelerometer accelerometer(ADXL_X, ADXL_Y, ADXL_Z);
 
@@ -38,7 +38,7 @@ void setup()
     //	2 (interrupt 1)
     //	0 (interrupt 2)
     //	1 (interrupt 3)
-    //	7 (interrupt 4) - We are using this pin for trigger
+    //	7 (interrupt 4)
     attachInterrupt(0, actuator_reload_limit_change, CHANGE);
     //attachInterrupt(1, actuator_reload_limit_change, CHANGE);
 
