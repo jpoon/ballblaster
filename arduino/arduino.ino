@@ -69,11 +69,9 @@ void setup()
 void loop()
 {
     char cmd;
-    while (Serial.available() > 0) 
+    while (Serial.available()) 
     {
         cmd = (char)Serial.read();
-        Serial.print(cmd);
-    
         switch (cmd) 
         {
         // reload
@@ -126,7 +124,8 @@ void loop()
             float xvoltage, yvoltage, zvoltage;
             accelerometer.getXYZ(&x, &y, &z);
             accelerometer.getAcceleration(&xvoltage, &yvoltage, &zvoltage);
-            
+           
+			/* 
             Serial.println("xyz:");
             Serial.println(x);
             Serial.println(y);
@@ -135,6 +134,7 @@ void loop()
             Serial.println(xvoltage);
             Serial.println(yvoltage);
             Serial.println(zvoltage);
+			*/
             break;
         }
     }

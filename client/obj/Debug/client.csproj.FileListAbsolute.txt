@@ -1,0 +1,9 @@
+D:\ballblaster\client\bin\Debug\client.exe.config
+D:\ballblaster\client\bin\Debug\client.exe
+D:\ballblaster\client\bin\Debug\client.pdb
+D:\ballblaster\client\obj\Debug\client.csprojResolveAssemblyReference.cache
+D:\ballblaster\client\obj\Debug\client.Form1.resources
+D:\ballblaster\client\obj\Debug\client.Properties.Resources.resources
+D:\ballblaster\client\obj\Debug\client.csproj.GenerateResource.Cache
+D:\ballblaster\client\obj\Debug\client.exe
+D:\ballblaster\client\obj\Debug\client.pdb
