@@ -42,7 +42,7 @@ void actuator_reload_limit_change()
 			break;
 
 		case 2: //retract
-			debounceTime = 500;
+			debounceTime = 750;
 			break;
 		}
 

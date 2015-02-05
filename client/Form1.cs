@@ -57,14 +57,14 @@
             serialPort.Write("g");
         }
 
-        private void fireButton_MouseDown(object sender, EventArgs e)
+        private void fireButton_Click(object sender, EventArgs e)
         {
             serialPort.Write("q");
             Thread.Sleep(500);
             serialPort.Write("d");
         }
 
-        private void omgButton_MouseDown(object sender, EventArgs e)
+        private void omgButton_Click(object sender, EventArgs e)
         {
             serialPort.Write("d");
             serialPort.Write("i");

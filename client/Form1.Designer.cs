@@ -1,4 +1,6 @@
-﻿namespace client
+﻿using System.Security.AccessControl;
+
+namespace client
 {
     partial class Form1
     {
@@ -81,6 +83,7 @@
             this.fireButton.TabIndex = 5;
             this.fireButton.Text = "Fire";
             this.fireButton.UseVisualStyleBackColor = false;
+            this.fireButton.Click += new System.EventHandler(this.fireButton_Click);
             // 
             // omgButton
             // 
@@ -90,7 +93,7 @@
             this.omgButton.TabIndex = 6;
             this.omgButton.Text = "!!!";
             this.omgButton.UseVisualStyleBackColor = true;
-            this.omgButton.Click += new System.EventHandler(this.omgButton_MouseDown);
+            this.omgButton.Click += new System.EventHandler(this.omgButton_Click);
             // 
             // Form1
             // 
