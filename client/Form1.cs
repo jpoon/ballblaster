@@ -14,13 +14,12 @@
             InitializeComponent();
 
             serialPort = new SerialPort("COM3", 115200);
-            //serialPort.Open();
+            serialPort.Open();
 
-            /*
             if (!serialPort.IsOpen)
             {
                throw new ArgumentException(); 
-            }*/
+            }
         }
         void stopButton_MouseDown(object sender, EventArgs e)
         {
@@ -60,11 +59,6 @@
             serialPort.Write("d");
             serialPort.Write("i");
             serialPort.Write("n");
-        }
-
-        private void button_MouseUp(object sender, EventArgs e)
-        {
-            Console.Write("stop");
         }
     }
 }
