@@ -42,7 +42,7 @@ void actuator_reload_limit_change()
             break;
 
         case 2: //retract
-            debounceTime = 750;
+            debounceTime = 1000;
             break;
         }
 
@@ -72,7 +72,7 @@ void loop()
 {
     int reloadState;
     char cmd;
-    while (Serial.available()) 
+    if (Serial.available()) 
     {
         cmd = (char)Serial.read();
         switch (cmd) 
