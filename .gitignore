@@ -2,4 +2,12 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-bin/**
+[Bb]in/
+[Oo]bj/
+
+/BlasterRest/node_modules
+/BlasterRest/Scripts/typings
+/BlasterRest/.ntvs_analysis.dat
+/BlasterRest/**.js
+/BlasterRest/**.js.map
+*.suo
