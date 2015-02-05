@@ -9,8 +9,7 @@ Actuator::Actuator(int pin1, int pin2)
 	pinMode(_pin1, OUTPUT);
 	pinMode(_pin2, OUTPUT);
 
-	digitalWrite(_pin1, HIGH);
-	digitalWrite(_pin2, HIGH);
+	Stop();
 }
 
 void Actuator::Extend()

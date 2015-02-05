@@ -11,12 +11,14 @@
 #define ADXL_Y A1
 #define ADXL_Z A2
 
+// limit switches
+#define RELOAD_LIMIT_PIN 3
+
 // trigger relay
 Pulse trigger(6);
 
 // actuator
 ReloadActuator actuator_reload(9, 10);
-//ReloadActuator actuator_reload(11, 12);
 Actuator actuator_pitch(11, 12);
 Actuator actuator_yaw(7, 8);
 
@@ -27,7 +29,7 @@ void actuator_reload_limit_change()
     static unsigned long last_interrupt_time = 0;
     unsigned long interrupt_time = millis();
 
-    int buttonState = digitalRead(3);
+    int buttonState = digitalRead(RELOAD_LIMIT_PIN);
     if (buttonState == 1) {
 		unsigned int debounceTime = 250;
 
@@ -63,7 +65,7 @@ void setup()
     //	1 (interrupt 3)
     //	7 (interrupt 4)
 
-    pinMode(3, INPUT_PULLUP);
+    pinMode(RELOAD_LIMIT_PIN, INPUT_PULLUP);
 }
 
 void loop()
