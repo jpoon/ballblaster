@@ -103,7 +103,9 @@ namespace BlasterComms
 
         public void Fire()
         {
-            _port.Write("q");
+            Task.Run(() => _port.Write("q"))
+                .ContinueWith(async delegate { await Task.Delay(500); })
+                .ContinueWith((antecedent) => _port.Write("d"));
         }
 
         public event StatusDelegate Status;
