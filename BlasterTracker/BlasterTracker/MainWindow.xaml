@@ -1,0 +1,39 @@
+﻿<Window x:Class="BlasterTracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BlasterTracker"
+        mc:Ignorable="d"
+        Title="BlasterTracker" Height="477.086" Width="694.448">
+    <Grid>
+        <Button x:Name="startStopButton" Content="Start" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="startStopButton_Click"/>
+        <Button x:Name="switch" Content="Test" HorizontalAlignment="Left" Margin="109,10,0,0" VerticalAlignment="Top" Width="75" Click="switch_Click"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="260" Margin="10,35,0,0" VerticalAlignment="Top" Width="308"/>
+        <Button x:Name="button" Content="Mode Toggle" HorizontalAlignment="Left" Margin="443,10,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <Grid x:Name="moveGrid">
+            <Button x:Name="upButton" Content="Up" HorizontalAlignment="Left" Height="61" Margin="438,90,0,0" VerticalAlignment="Top" Width="73" MouseDown="upButton_MouseDown" MouseUp="stopButton_MouseDown"/>
+            <Button x:Name="downButton" Content="Down" HorizontalAlignment="Left" Height="61" Margin="438,251,0,0" VerticalAlignment="Top" Width="73" MouseDown="downButton_MouseDown" MouseUp="stopButton_MouseDown"/>
+            <Button x:Name="rightButton" Content="Right" HorizontalAlignment="Left" Height="61" Margin="532,170,0,0" VerticalAlignment="Top" Width="73" MouseDown="rightButton_MouseDown" MouseUp="stopButton_MouseDown"/>
+            <Button x:Name="leftButton" Content="Left" HorizontalAlignment="Left" Height="61" Margin="349,170,0,0" VerticalAlignment="Top" Width="73" MouseDown="leftButton_MouseDown" MouseUp="stopButton_MouseDown"/>
+            <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Height="61" Margin="438,170,0,0" VerticalAlignment="Top" Width="73" MouseDown="stopButton_MouseDown" MouseUp="stopButton_MouseDown"/>
+            <Button x:Name="fireButton" Content="Fire" HorizontalAlignment="Left" Height="84" Margin="552,279,0,0" VerticalAlignment="Top" Width="96" IsEnabled="false"/>
+
+        </Grid>
+        <Grid x:Name="hsvGrid" Visibility="Collapsed">
+            <Slider x:Name="hueMinSlider" HorizontalAlignment="Left" Margin="418,64,0,0" VerticalAlignment="Top" Width="187" Maximum="255" Minimum="0" Value="0" ValueChanged="onSliderChanged"/>
+            <Slider x:Name="satMinSlider" HorizontalAlignment="Left" Margin="418,103,0,0" VerticalAlignment="Top" Width="187" Maximum="255" Minimum="0" Value="132" ValueChanged="onSliderChanged"/>
+            <Slider x:Name="valMinSlider" HorizontalAlignment="Left" Margin="418,140,0,0" VerticalAlignment="Top" Width="187" Maximum="255" Minimum="0" Value="117" ValueChanged="onSliderChanged"/>
+            <Slider x:Name="hueMaxSlider" HorizontalAlignment="Left" Margin="418,201,0,0" VerticalAlignment="Top" Width="187" Maximum="255" Minimum="0" Value="199" ValueChanged="onSliderChanged"/>
+            <Slider x:Name="satMaxSlider" HorizontalAlignment="Left" Margin="418,240,0,0" VerticalAlignment="Top" Width="187" Maximum="255" Minimum="0" Value="210" ValueChanged="onSliderChanged"/>
+            <Slider x:Name="valMaxSlider" HorizontalAlignment="Left" Margin="418,277,0,0" VerticalAlignment="Top" Width="187" Maximum="255" Minimum="0" Value="255" ValueChanged="onSliderChanged"/>
+            <Label x:Name="labelminHue" Content="Min Hue" HorizontalAlignment="Left" Margin="323,59,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.538,-0.087" Width="95"/>
+            <Label x:Name="labelminSat" Content="Min Sat" HorizontalAlignment="Left" Margin="323,103,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.538,-0.087" Width="95"/>
+            <Label x:Name="labelminVal" Content="Min Val" HorizontalAlignment="Left" Margin="323,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.538,-0.087" Width="95"/>
+            <Label x:Name="labelmaxHue" Content="Max Hue" HorizontalAlignment="Left" Margin="323,192,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.538,-0.087" Width="95"/>
+            <Label x:Name="labelmaxSat" Content="Max Sat" HorizontalAlignment="Left" Margin="323,232,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.538,-0.087" Width="95"/>
+            <Label x:Name="labelmaxVal" Content="Max Val" HorizontalAlignment="Left" Margin="323,269,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.538,-0.087" Width="95"/>
+            <Label x:Name="commandLabel" Content="" HorizontalAlignment="Left" Height="60" Margin="342,336,0,0" VerticalAlignment="Top" Width="248"/>
+        </Grid>
+    </Grid>
+</Window>
