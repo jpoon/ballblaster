@@ -25,12 +25,8 @@
 
             serialPort = new SerialPort("COM3", 115200);
             serialPort.Open();
-
-            if (!serialPort.IsOpen)
-            {
-               throw new ArgumentException(); 
-            }
         }
+
         void stopButton_MouseDown(object sender, EventArgs e)
         {
             serialPort.Write("i");
