@@ -31,20 +31,20 @@ void actuator_reload_limit_change()
 
     int buttonState = digitalRead(RELOAD_LIMIT_PIN);
     if (buttonState == 1) {
-		unsigned int debounceTime = 250;
+        unsigned int debounceTime = 250;
 
-		int actuatorStatus = actuator_reload.GetState();
-		switch(actuatorStatus) {
-		case 0: //stopped
-			break;
+        int actuatorStatus = actuator_reload.GetState();
+        switch(actuatorStatus) {
+        case 0: //stopped
+            break;
 
-		case 1: //extend
-			break;
+        case 1: //extend
+            break;
 
-		case 2: //retract
-			debounceTime = 750;
-			break;
-		}
+        case 2: //retract
+            debounceTime = 750;
+            break;
+        }
 
         if (interrupt_time - last_interrupt_time > debounceTime)
         {
@@ -70,6 +70,7 @@ void setup()
 
 void loop()
 {
+    int reloadState;
     char cmd;
     while (Serial.available()) 
     {
@@ -87,10 +88,13 @@ void loop()
             actuator_reload.Stop();
             break;
         case 'd':
-            detachInterrupt(0);
-            actuator_reload.Reload();
-            delay(750);
-            attachInterrupt(0, &actuator_reload_limit_change, CHANGE);
+            reloadState = actuator_reload.GetState();
+            if (reloadState == 0) {
+                detachInterrupt(0);
+                actuator_reload.Reload();
+                delay(750);
+                attachInterrupt(0, &actuator_reload_limit_change, CHANGE);
+            }
             break;
 
         // pitch
@@ -127,7 +131,7 @@ void loop()
             accelerometer.getXYZ(&x, &y, &z);
             accelerometer.getAcceleration(&xvoltage, &yvoltage, &zvoltage);
            
-			/* 
+            /* 
             Serial.println("xyz:");
             Serial.println(x);
             Serial.println(y);
@@ -136,7 +140,7 @@ void loop()
             Serial.println(xvoltage);
             Serial.println(yvoltage);
             Serial.println(zvoltage);
-			*/
+            */
             break;
         }
     }
