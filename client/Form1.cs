@@ -13,6 +13,16 @@
         {
             InitializeComponent();
 
+            this.leftButton.MouseDown += leftButton_MouseDown;
+            this.rightButton.MouseDown += rightButton_MouseDown;
+            this.upButton.MouseDown += upButton_MouseDown;
+            this.downButton.MouseDown += downButton_MouseDown;
+
+            this.leftButton.MouseUp += stopButton_MouseDown;
+            this.rightButton.MouseUp += stopButton_MouseDown;
+            this.upButton.MouseUp += stopButton_MouseDown;
+            this.downButton.MouseUp += stopButton_MouseDown;
+
             serialPort = new SerialPort("COM3", 115200);
             serialPort.Open();
 
