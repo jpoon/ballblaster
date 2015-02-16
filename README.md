@@ -1,5 +1,5 @@
 # ballblaster 
-Hackathon project to control an [8 ball launcher](http://www.tshirtgun.com/8balllauncher.html).
+Hackathon project to control an [8 ball launcher](http://www.tshirtgun.com/8balllauncher.html). The launcher is set on a platform and connected to several actuators and a solenoid to allow it to control the cannon's pitch, yaw, reload mechanism, and trigger. The mechanical parts are controlled by the Arduino Yun which exposes an API that is consumed by the OpenCV program that tracks our target. 
 
 ## Team
 * [@stefangordon](https://github.com/stefangordon)
@@ -12,7 +12,9 @@ Hackathon project to control an [8 ball launcher](http://www.tshirtgun.com/8ball
 
 * [8 Ball Launcher](http://www.tshirtgun.com/8balllauncher.html)
 * [Arduino Yun](http://arduino.cc/en/Main/ArduinoBoardYun)
-* Kinect
+* 3x Linear Actuators (for pitch, yaw, reload)
+* 1x Solenoid
+* 2x Relay
 * HD Camera
 
 ## Structure
